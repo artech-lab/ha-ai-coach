@@ -1,6 +1,9 @@
 {
   "domain": "ai_coach",
   "name": "AI Coach",
+  "categories": [
+    "ai_voice"
+  ],
   "after_dependencies": [
     "ai_task"
   ],

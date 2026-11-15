@@ -17,7 +17,7 @@
           "run_at": "Also every day at"
         },
         "data_description": {
-          "name": "Used for the device and in the entity IDs: sensor.ai_coach_<name>_score and so on.",
+          "name": "Used for the device and in the entity IDs: the name Energy gives sensor.ai_coach_energy_score and so on.",
           "topic": "What the AI should evaluate, in a few words, for example \"energy use of the home\".",
           "entities": "Name, area, value and unit of these entities are sent to the AI.",
           "label": "Also every entity with this label, and the sensors of every device with it.",
