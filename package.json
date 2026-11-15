@@ -1,0 +1,14 @@
+{
+  "name": "ha-ai-coach",
+  "private": true,
+  "description": "Development tools for the bundled card (screenshots). Not needed to use the integration.",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test tests/js/card.test.mjs",
+    "screenshots": "node scripts/screenshots.cjs"
+  },
+  "devDependencies": {
+    "@mdi/js": "^7.4.47",
+    "playwright": "^1.50.0"
+  }
+}

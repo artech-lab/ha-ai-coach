@@ -1,0 +1,176 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up an AI coach",
+        "description": "The AI Task integration analyses the chosen entities on a schedule and returns a score, a summary, up to five tips and how reliable the data are. The prompt can be customised later in the options.",
+        "data": {
+          "name": "Name",
+          "topic": "Topic",
+          "entities": "Entities to analyse",
+          "label": "Label",
+          "instructions": "Extra instructions",
+          "ai_task_entity": "AI Task entity",
+          "update_interval": "Analyse every",
+          "active_from": "Only from",
+          "active_until": "Until",
+          "run_at": "Also every day at"
+        },
+        "data_description": {
+          "name": "Used for the device and in the entity IDs: sensor.ai_coach_<name>_score and so on.",
+          "topic": "What the AI should evaluate, in a few words, for example \"energy use of the home\".",
+          "entities": "Name, area, value and unit of these entities are sent to the AI.",
+          "label": "Also every entity with this label, and the sensors of every device with it.",
+          "instructions": "Goals, context and references the AI should use. Added to the standard prompt.",
+          "ai_task_entity": "Empty: the first AI Task entity found.",
+          "update_interval": "0 = no periodic analysis. With a time window, runs only inside it.",
+          "active_from": "Start of the time window for the periodic analysis (optional).",
+          "active_until": "End of the time window for the periodic analysis (optional).",
+          "run_at": "A fixed daily analysis, in addition to the periodic one (optional)."
+        }
+      }
+    },
+    "error": {
+      "no_data": "Choose at least one entity or a label (or write a prompt template).",
+      "window_incomplete": "Set both ends of the time window, or neither."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "AI coach options",
+        "description": "Change what is analysed, when and how. The prompt template is for advanced users: leave it empty to use the standard prompt.",
+        "data": {
+          "topic": "Topic",
+          "entities": "Entities to analyse",
+          "label": "Label",
+          "instructions": "Extra instructions",
+          "ai_task_entity": "AI Task entity",
+          "update_interval": "Analyse every",
+          "active_from": "Only from",
+          "active_until": "Until",
+          "run_at": "Also every day at",
+          "prompt_template": "Prompt template (advanced)"
+        },
+        "data_description": {
+          "topic": "What the AI should evaluate, in a few words, for example \"energy use of the home\".",
+          "entities": "Name, area, value and unit of these entities are sent to the AI.",
+          "label": "Also every entity with this label, and the sensors of every device with it.",
+          "instructions": "Goals, context and references the AI should use. Added to the standard prompt.",
+          "ai_task_entity": "Empty: the first AI Task entity found.",
+          "update_interval": "0 = no periodic analysis. With a time window, runs only inside it.",
+          "active_from": "Start of the time window for the periodic analysis (optional).",
+          "active_until": "End of the time window for the periodic analysis (optional).",
+          "run_at": "A fixed daily analysis, in addition to the periodic one (optional).",
+          "prompt_template": "Replaces the standard prompt. Jinja template rendered at every analysis, with the variables coach_data (the entity values), topic, language and instructions. The answer is always summary, score, tips and confidence."
+        }
+      }
+    },
+    "error": {
+      "no_data": "Choose at least one entity or a label (or write a prompt template).",
+      "window_incomplete": "Set both ends of the time window, or neither."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "score": {
+        "name": "Score"
+      },
+      "confidence": {
+        "name": "Confidence"
+      },
+      "summary": {
+        "name": "Summary",
+        "state_attributes": {
+          "text": {
+            "name": "Full text"
+          }
+        }
+      },
+      "tips": {
+        "name": "Tips",
+        "state_attributes": {
+          "tips": {
+            "name": "Tips"
+          }
+        }
+      },
+      "last_analysis": {
+        "name": "Last analysis",
+        "state_attributes": {
+          "error": {
+            "name": "Error"
+          },
+          "duration": {
+            "name": "Duration (s)"
+          },
+          "topic": {
+            "name": "Topic"
+          }
+        }
+      }
+    },
+    "binary_sensor": {
+      "analysing": {
+        "name": "Analysing"
+      },
+      "problem": {
+        "name": "Analysis problem"
+      }
+    },
+    "button": {
+      "run_analysis": {
+        "name": "Run analysis"
+      }
+    }
+  },
+  "exceptions": {
+    "entry_not_found": {
+      "message": "No AI Coach entry with ID {entry_id}."
+    },
+    "entry_not_loaded": {
+      "message": "The AI coach {name} is not loaded."
+    },
+    "analysis_failed": {
+      "message": "The analysis of {name} failed: {error}"
+    }
+  },
+  "services": {
+    "run_analysis": {
+      "name": "Run analysis",
+      "description": "Runs the AI analysis of a coach now and returns the result.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Coach",
+          "description": "The AI Coach entry."
+        }
+      }
+    },
+    "set_result": {
+      "name": "Set result",
+      "description": "Writes the result of a coach by hand, for example to carry over the last analysis from helpers.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Coach",
+          "description": "The AI Coach entry."
+        },
+        "summary": {
+          "name": "Summary",
+          "description": "Summary of the situation."
+        },
+        "score": {
+          "name": "Score",
+          "description": "Score from 0 to 100."
+        },
+        "confidence": {
+          "name": "Confidence",
+          "description": "Confidence from 0 to 10."
+        },
+        "tips": {
+          "name": "Tips",
+          "description": "Up to five tips, each in the form \"Theme: text\"."
+        }
+      }
+    }
+  }
+}

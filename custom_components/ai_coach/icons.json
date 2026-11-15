@@ -1,0 +1,48 @@
+{
+  "entity": {
+    "sensor": {
+      "score": {
+        "default": "mdi:speedometer"
+      },
+      "confidence": {
+        "default": "mdi:check-decagram-outline"
+      },
+      "summary": {
+        "default": "mdi:robot-outline"
+      },
+      "tips": {
+        "default": "mdi:lightbulb-on-outline"
+      },
+      "last_analysis": {
+        "default": "mdi:clock-check-outline"
+      }
+    },
+    "binary_sensor": {
+      "analysing": {
+        "default": "mdi:robot-off-outline",
+        "state": {
+          "on": "mdi:robot-excited-outline"
+        }
+      },
+      "problem": {
+        "default": "mdi:robot-outline",
+        "state": {
+          "on": "mdi:robot-confused-outline"
+        }
+      }
+    },
+    "button": {
+      "run_analysis": {
+        "default": "mdi:refresh"
+      }
+    }
+  },
+  "services": {
+    "run_analysis": {
+      "service": "mdi:robot-outline"
+    },
+    "set_result": {
+      "service": "mdi:database-import"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+# Notification when a coach scores below 40. Demo notify service: replace it with your own.
+alias: AI Coach - low score
+triggers:
+  - trigger: event
+    event_type: ai_coach_analysis_completed
+conditions:
+  - condition: template
+    value_template: "{{ trigger.event.data.score is number and trigger.event.data.score < 40 }}"
+actions:
+  - action: notify.mobile_app_my_phone
+    data:
+      title: "{{ trigger.event.data.name }}: {{ trigger.event.data.score }}/100"
+      message: >-
+        {{ trigger.event.data.summary }}
+        {{ trigger.event.data.tips | first | default('') }}
+mode: queued

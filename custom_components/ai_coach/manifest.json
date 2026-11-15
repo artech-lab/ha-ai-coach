@@ -1,0 +1,21 @@
+{
+  "domain": "ai_coach",
+  "name": "AI Coach",
+  "after_dependencies": [
+    "ai_task"
+  ],
+  "codeowners": [
+    "@artech-lab"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
+  "documentation": "https://github.com/artech-lab/ha-ai-coach",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/artech-lab/ha-ai-coach/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}

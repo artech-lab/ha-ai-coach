@@ -1,0 +1,40 @@
+run_analysis:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: ai_coach
+set_result:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: ai_coach
+    summary:
+      required: true
+      selector:
+        text:
+          multiline: true
+    score:
+      example: 72
+      selector:
+        number:
+          min: 0
+          max: 100
+          step: 1
+          mode: box
+    confidence:
+      example: 8
+      selector:
+        number:
+          min: 0
+          max: 10
+          step: 1
+          mode: box
+    tips:
+      example: '["Air: open the windows for 10 minutes now"]'
+      selector:
+        text:
+          multiple: true

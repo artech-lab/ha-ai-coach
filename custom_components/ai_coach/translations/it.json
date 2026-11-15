@@ -1,0 +1,176 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configura un coach AI",
+        "description": "L'integrazione AI Task analizza le entità scelte secondo una pianificazione e restituisce un punteggio, una sintesi, fino a cinque consigli e quanto sono affidabili i dati. Il prompt si può personalizzare dopo, nelle opzioni.",
+        "data": {
+          "name": "Nome",
+          "topic": "Argomento",
+          "entities": "Entità da analizzare",
+          "label": "Etichetta",
+          "instructions": "Istruzioni aggiuntive",
+          "ai_task_entity": "Entità AI Task",
+          "update_interval": "Analizza ogni",
+          "active_from": "Solo dalle",
+          "active_until": "Alle",
+          "run_at": "Anche ogni giorno alle"
+        },
+        "data_description": {
+          "name": "Usato per il dispositivo e negli ID delle entità: sensor.ai_coach_<nome>_score e così via.",
+          "topic": "Cosa deve valutare l'AI, in poche parole, per esempio \"consumi energetici della casa\".",
+          "entities": "Nome, area, valore e unità di queste entità vengono inviati all'AI.",
+          "label": "Anche tutte le entità con questa etichetta e i sensori di tutti i dispositivi che la hanno.",
+          "instructions": "Obiettivi, contesto e riferimenti che l'AI deve usare. Aggiunte al prompt standard.",
+          "ai_task_entity": "Vuoto: la prima entità AI Task trovata.",
+          "update_interval": "0 = nessuna analisi periodica. Con una fascia oraria, solo al suo interno.",
+          "active_from": "Inizio della fascia oraria per l'analisi periodica (facoltativo).",
+          "active_until": "Fine della fascia oraria per l'analisi periodica (facoltativo).",
+          "run_at": "Un'analisi giornaliera a orario fisso, oltre a quella periodica (facoltativo)."
+        }
+      }
+    },
+    "error": {
+      "no_data": "Scegli almeno un'entità o un'etichetta (oppure scrivi un template del prompt).",
+      "window_incomplete": "Imposta entrambi gli estremi della fascia oraria, oppure nessuno."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni del coach AI",
+        "description": "Cambia cosa viene analizzato, quando e come. Il template del prompt è per utenti esperti: lascialo vuoto per usare il prompt standard.",
+        "data": {
+          "topic": "Argomento",
+          "entities": "Entità da analizzare",
+          "label": "Etichetta",
+          "instructions": "Istruzioni aggiuntive",
+          "ai_task_entity": "Entità AI Task",
+          "update_interval": "Analizza ogni",
+          "active_from": "Solo dalle",
+          "active_until": "Alle",
+          "run_at": "Anche ogni giorno alle",
+          "prompt_template": "Template del prompt (avanzato)"
+        },
+        "data_description": {
+          "topic": "Cosa deve valutare l'AI, in poche parole, per esempio \"consumi energetici della casa\".",
+          "entities": "Nome, area, valore e unità di queste entità vengono inviati all'AI.",
+          "label": "Anche tutte le entità con questa etichetta e i sensori di tutti i dispositivi che la hanno.",
+          "instructions": "Obiettivi, contesto e riferimenti che l'AI deve usare. Aggiunte al prompt standard.",
+          "ai_task_entity": "Vuoto: la prima entità AI Task trovata.",
+          "update_interval": "0 = nessuna analisi periodica. Con una fascia oraria, solo al suo interno.",
+          "active_from": "Inizio della fascia oraria per l'analisi periodica (facoltativo).",
+          "active_until": "Fine della fascia oraria per l'analisi periodica (facoltativo).",
+          "run_at": "Un'analisi giornaliera a orario fisso, oltre a quella periodica (facoltativo).",
+          "prompt_template": "Sostituisce il prompt standard. Template Jinja calcolato a ogni analisi, con le variabili coach_data (i valori delle entità), topic, language e instructions. La risposta è sempre sintesi, punteggio, consigli e affidabilità."
+        }
+      }
+    },
+    "error": {
+      "no_data": "Scegli almeno un'entità o un'etichetta (oppure scrivi un template del prompt).",
+      "window_incomplete": "Imposta entrambi gli estremi della fascia oraria, oppure nessuno."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "score": {
+        "name": "Punteggio"
+      },
+      "confidence": {
+        "name": "Affidabilità"
+      },
+      "summary": {
+        "name": "Sintesi",
+        "state_attributes": {
+          "text": {
+            "name": "Testo completo"
+          }
+        }
+      },
+      "tips": {
+        "name": "Consigli",
+        "state_attributes": {
+          "tips": {
+            "name": "Consigli"
+          }
+        }
+      },
+      "last_analysis": {
+        "name": "Ultima analisi",
+        "state_attributes": {
+          "error": {
+            "name": "Errore"
+          },
+          "duration": {
+            "name": "Durata (s)"
+          },
+          "topic": {
+            "name": "Argomento"
+          }
+        }
+      }
+    },
+    "binary_sensor": {
+      "analysing": {
+        "name": "Analisi in corso"
+      },
+      "problem": {
+        "name": "Problema nell'analisi"
+      }
+    },
+    "button": {
+      "run_analysis": {
+        "name": "Esegui analisi"
+      }
+    }
+  },
+  "exceptions": {
+    "entry_not_found": {
+      "message": "Nessuna voce AI Coach con ID {entry_id}."
+    },
+    "entry_not_loaded": {
+      "message": "Il coach AI {name} non è caricato."
+    },
+    "analysis_failed": {
+      "message": "L'analisi di {name} non è riuscita: {error}"
+    }
+  },
+  "services": {
+    "run_analysis": {
+      "name": "Esegui analisi",
+      "description": "Esegue subito l'analisi AI di un coach e restituisce il risultato.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Coach",
+          "description": "La voce AI Coach."
+        }
+      }
+    },
+    "set_result": {
+      "name": "Imposta risultato",
+      "description": "Scrive a mano il risultato di un coach, per esempio per riportare l'ultima analisi dagli helper.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Coach",
+          "description": "La voce AI Coach."
+        },
+        "summary": {
+          "name": "Sintesi",
+          "description": "Sintesi della situazione."
+        },
+        "score": {
+          "name": "Punteggio",
+          "description": "Punteggio da 0 a 100."
+        },
+        "confidence": {
+          "name": "Affidabilità",
+          "description": "Affidabilità da 0 a 10."
+        },
+        "tips": {
+          "name": "Consigli",
+          "description": "Fino a cinque consigli, ciascuno nella forma \"Tema: testo\"."
+        }
+      }
+    }
+  }
+}

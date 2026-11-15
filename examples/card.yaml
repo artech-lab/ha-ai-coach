@@ -1,0 +1,24 @@
+# Card for a coach named "Comfort", full layout. Demo entity ids: replace them with your own.
+type: custom:ai-coach-card
+entity: sensor.ai_coach_comfort_score
+icon: mdi:home-thermometer
+color: light-blue
+tips_name: Comfort tips
+stat1_icon: mdi:thermometer
+stat1_name: average
+stat1_entity: sensor.home_average_temperature
+stat1_decimals: 1
+stat1_suffix: " °C"
+stat2_icon: mdi:molecule-co2
+stat2_name: CO₂ max
+stat2_template: >-
+  {{ [states('sensor.living_room_co2') | float(0), states('sensor.bedroom_co2') | float(0)] | max | int }}
+stat2_suffix: " ppm"
+stat2_warn_above: 1000
+stat3_icon: mdi:water-percent
+stat3_name: RH
+stat3_entity: sensor.living_room_humidity
+stat3_suffix: " %"
+graph_entity: sensor.home_average_temperature
+graph_name: Average temperature · 24 h
+graph_hours: 24

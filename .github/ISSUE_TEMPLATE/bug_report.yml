@@ -1,0 +1,40 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: What did you expect and what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AI Coach version
+    validations:
+      required: true
+  - type: input
+    id: ai
+    attributes:
+      label: AI integration and model
+      description: The integration that provides the AI Task entity, and the model.
+      placeholder: "OpenAI gpt-4o-mini / Ollama llama3.1 / Google Gemini 2.5 Flash"
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Settings → Devices & services → AI Coach → ⋮ → Download diagnostics. Attach the file.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant log lines with `custom_components.ai_coach` set to debug.
+      render: text
